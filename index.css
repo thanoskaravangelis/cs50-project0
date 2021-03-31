@@ -168,22 +168,26 @@
         height: 65%;
     }
 
-    .keyboard-container {
+    .microphone-container {
         width: 40px;
         line-height: 44px;
         cursor:pointer;
+        vertical-align: middle;
+        display: flex;
+        flex-direction: column;
     }
 
-    .span-keyboard{
+    .microphone{
         background: url('//www.gstatic.com/inputtools/images/tia.png') no-repeat center;
         height: 24px;
         width: 24px;
+        flex:1;
+        margin-left: 8px;
+        object-fit: contain;
+        object-position: center;
     }
 
-    .keyboard-image-container{
-        height:fit-content;
-        width: fit-content;
-    }
+    
     
     #search-button , #lucky-button{
         background-color: #f8f9fa;
