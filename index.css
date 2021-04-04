@@ -131,7 +131,7 @@
         box-sizing: border-box;
     }
     
-    .search-border:hover{
+    .search-border:hover, .search-border:active, .search-border:focus{
         background-color: #fff;
         box-shadow: 0 1px 6px rgba(32, 33, 36, .28);
         border-color: rgba(223, 225, 229, 0);
@@ -215,7 +215,6 @@
     }
 
     .microphone{
-        background: url('//www.gstatic.com/inputtools/images/tia.png') no-repeat center;
         height: 24px;
         width: 24px;
         flex:1;
@@ -224,7 +223,81 @@
         object-position: center;
     }
 
-    
+    .search-history {
+        display: flex;
+        width: 589px;
+        z-index: 3;
+        position:absolute;
+        text-align:left;
+        background: #fff;
+        box-shadow: 0 4px 6px rgba(32,33,36,.28);
+        flex-direction: column;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 0 0 24px 24px;
+        padding-bottom: 4px;
+        overflow: hidden;
+        user-select: none;
+    }
+
+    .history-list {
+        display: block;
+        list-style-type: disc;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        padding-inline-start: 40px;
+        padding-bottom: 8px;
+    }
+
+    .history-item {
+        display: flex;
+        min-width:0;
+        padding:0;
+        margin:0;
+        align-items: center;
+        list-style-type: disc;
+    }
+
+    .history-line {
+        flex:auto;
+        display: flex;
+        align-items: center;
+        margin: 0 20px 0 14px;
+    }
+
+    .history-line-text {
+        min-width: 0;
+        padding: 6px 0;
+        color:#52188c;
+        font-size: 16px;
+        word-break: break-word;
+        padding-right: 8px;
+    }
+
+    .delete-line{
+        font: 13px arial,sans-serif;
+        color:#80868b;
+        align-self: stretch;
+        cursor: pointer;
+        text-align: center;
+        margin-top: 8px;
+    }
+
+    .history-clock-image {
+        display: flex;
+        align-items: center;
+        margin: 0 13px 0 1px;
+        background: url(media/clock.webp) no-repeat 0 -21px;
+        background-size: 20px;
+        min-height: 20px;
+        min-width: 20px;
+        height:20px;
+        width:20px;
+    }
     
     #search-button , #lucky-button{
         background-color: #f8f9fa;
