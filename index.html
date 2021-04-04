@@ -41,6 +41,8 @@
             // This is a click outside.      
             myelem.style['border-color'] = '#dfe1e5';
             myelem.style['box-shadow'] = 'none'; 
+            myelem.style['border-radius'] = '24px';
+            document.getElementById("search-history").style.display = 'none';
         });
 
         function deleteText() {
@@ -49,12 +51,6 @@
             showClearSearch();
         }
 
-        window.onload = deleteText;
-        window.onload = () => {
-            if(!localStorage.getItem("inputs")) {
-                localStorage.setItem('inputs','19991');
-            }
-        }
 
         function saveInputValues(){
 
@@ -62,10 +58,64 @@
             let newinput = document.getElementById("search-text").value;
             let saved = JSON.parse(localStorage.getItem("inputs"));
 
-            let newsaved = saved + "," + newinput;
+            let newsaved ;
+            if (saved != 19991) {
+                newsaved = saved + "," + newinput;
+            }
+            else {
+                newsaved = newinput;
+            }
             console.log(newinput);
 
             localStorage.setItem("inputs",JSON.stringify(newsaved));
+
+            let hist_str=localStorage.getItem('inputs');
+            let history = hist_str.split(",",11);
+            if(history.length==0) {
+                return ;
+            }
+            let i;
+            let list_all = document.getElementById("history-list");
+            console.log(history);
+    
+            list_all.innerHTML += '<li class="history-item"><div class="history-line"><div class="history-clock-image"></div><div class="history-line-text"></div><div class="delete-line">Remove</div></div></li>';
+            let hist_text = document.getElementsByClassName("history-line-text");
+            hist_text[i].innerText=newinput;
+        }
+
+        function showHistory() {
+            let hist_str=localStorage.getItem('inputs');
+            let history = hist_str.split(", ",11);
+            if(history.length==0 || hist_str==19991) {
+                return ;
+            }
+            document.getElementById("search-border").style['border-radius'] = "24px 24px 0 0";
+
+            document.getElementById("search-history").style.display = "flex";
+        }
+
+        window.onload = () => {
+            deleteText();
+            if(!localStorage.getItem("inputs")) {
+                localStorage.setItem('inputs','19991');
+            }
+            let hist_str=localStorage.getItem('inputs');
+            let history = hist_str.split(",").reverse();
+            if(history.length==0 || hist_str==19991) {
+                return ;
+            }
+            let i;
+            let list_all = document.getElementById("history-list");
+            console.log(history);
+            for (i=0; i<history.length && i<10;  i++) {
+                if(localStorage.getItem('inputs')==19991 ){
+                    return;
+                }
+                list_all.innerHTML += '<li class="history-item"><div class="history-line"><div class="history-clock-image"></div><div class="history-line-text"></div><div class="delete-line">Remove</div></div></li>';
+                let hist_text = document.getElementsByClassName("history-line-text");
+                hist_text[i].innerText=history[i].toString();
+            }
+            document.getElementById("search-history").innerHTML += '<div class="history-button-container center-content"><input id="search-button" type="submit" value="Google Search" onclick="saveInputValues(), addToHistory()"><button id="lucky-button" type="submit">I\'m Feeling Lucky</button></div>'
         }
     </script>
 </head>
@@ -77,7 +127,7 @@
         <a class="sign-in-but" id="sign-in-button" href="https://accounts.google.com/signin/v2">Sign In</a>
     </div>
 
-    <div class="main-container">
+    <div id="main-container" class="main-container">
         <div class="image-container">
             <div id="image-padding">
                 <img id="logo" src="media/googlelogo_color_272x92dp.webp" alt="google-logo" width="272" height="92">
@@ -92,7 +142,7 @@
                         </svg>
                     </div>
                     <div class="search-box">
-                        <input id="search-text" type="text" name="q" oninput="showClearSearch() ,showShadow()" onclick="showShadow()" autocomplete="off">
+                        <input id="search-text" type="text" name="q" oninput="showClearSearch() ,showShadow()" onclick="showShadow(),  showHistory()" autocomplete="off">
                         <div id="search-clear" class="clear-search" onclick="deleteText()">
                             <span class="search-clear-x">
                                 <svg class="x-svg" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -102,7 +152,7 @@
                             <span class="search-clear-separator"></span>
                         </div>
                     </div>
-                    <div class="microphone-container" onclick="saveInputValues()">
+                    <div class="microphone-container">
                         <svg class="microphone" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="m12 15c1.66 0 3-1.31 3-2.97v-7.02c0-1.66-1.34-3.01-3-3.01s-3 1.34-3 3.01v7.02c0 1.66 1.34 2.97 3 2.97z" fill="#4285f4"></path>
                             <path d="m11 18.08h2v3.92h-2z" fill="#34a853"></path>
@@ -111,19 +161,13 @@
                         </svg>
                     </div>
                 </div>
-                <div class="search-history">
-                    <ul class="history-list">
-                        <li class="history-item">
-                            <div class="history-line">
-                                <div class="history-clock-image"></div>
-                                <div class="history-line-text">Hey,I am 1!</div>
-                                <div class="delete-line">Remove</div>
-                            </div>
-                        </li>
+                <div id="search-history" class="search-history">
+                    <div id="history-separator" class="history-separator"></div>
+                    <ul id="history-list" class="history-list">
                     </ul>
                 </div>
                 <div class="button-container center-content">
-                    <input id="search-button" type="submit" value="Google Search">
+                    <input id="search-button" type="submit" value="Google Search" onclick="saveInputValues(), addToHistory()">
                     <button id="lucky-button" type="submit">I'm Feeling Lucky</button>
                 </div>
             </form>
