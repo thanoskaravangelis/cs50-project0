@@ -282,7 +282,7 @@
         margin: 0 20px 0 14px;
     }
 
-    .history-line:hover, .history-line:focus {
+    .history-item:hover, .history-item:focus {
         background-color: #eeeeee;
     }
 
@@ -413,3 +413,83 @@
             max-height:92px;
         }
     }
+
+
+    /*Google Images extras*/
+
+    #images-body {
+        min-width: 1140px;
+    }
+
+    .image-subt {
+        color: #4285f4;
+        font: 16px/16px roboto-regular, arial, sans-serif;
+        left: 106px;
+        position: relative;
+        top: -20px;
+        white-space: nowrap;
+    }
+
+    .image-search-border{
+        width:534px;
+    }
+
+    .image-search-history {
+        width:534px; 
+    }
+
+    .image-history-line-text{
+        width:400px;
+    }
+
+    #image-image-padding{
+        padding-top: 130px;
+        max-height: 92px; 
+        height: 100%; 
+        margin-top: auto;
+    }
+
+    .camera-container{
+        flex: auto;
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        border: 0;
+        background: transparent;
+        outline: none;
+        padding: 0 8px;
+    }
+
+    .camera-img{
+        background: url(media/photo_camera.png) 0 0 no-repeat;
+        height: 24px;
+        width: 24px;
+        background-size: 24px;
+    }
+
+    .blue-lens-container{
+        display:block;
+        align-items: center;
+    }
+
+    .blue-search-icon{
+        color: #4285f4;
+        fill: currentColor;
+        line-height: 24px;
+        height: 24px;
+        width: 24px;
+        object-fit: contain;
+    }
+
+    .img-search-button {
+        height: 44px;
+        width: 44px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        flex:auto;
+        padding-right: 8px;
+        margin-left:12px;
+    }
+
+    
