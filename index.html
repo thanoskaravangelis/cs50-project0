@@ -85,6 +85,16 @@
             }
         }
 
+        function deleteItem() {
+            let hist_str=localStorage.getItem('inputs');
+            let history = hist_str.split(",").reverse();
+            let list_all = document.getElementById("history-list");
+            let i;
+            for (i=0; i<history.length && i<10;  i++) {
+                
+            }
+        }
+
         function showHistory() {
             let hist_str=localStorage.getItem('inputs');
             let history = hist_str.split(", ",11);
@@ -114,8 +124,9 @@
                     return;
                 }
                 list_all.innerHTML += '<li class="history-item"><div class="history-line"><div class="history-clock-image"></div><div class="history-line-text"></div><div class="delete-line">Remove</div></div></li>';
-                let hist_text = document.getElementsByClassName("history-line-text");
-                hist_text[i].innerText=history[i].toString().replace('"','').replace('"','');
+                document.getElementsByClassName("history-line-text")[i].setAttribute("id","history-line-text-"+i);
+                document.getElementsByClassName("delete-line")[i].setAttribute("id","delete-line-"+i);
+                document.getElementById("history-line-text-"+i).innerText=history[i].toString().replace('"','').replace('"','');
             }
             document.getElementById("search-history").innerHTML += '<div class="history-button-container center-content"><input id="search-button" type="submit" value="Google Search" onclick="saveInputValues()"><button id="lucky-button" type="submit">I\'m Feeling Lucky</button></div>'
         }

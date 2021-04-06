@@ -114,8 +114,9 @@
                     return;
                 }
                 list_all.innerHTML += '<li class="history-item"><div class="history-line"><div class="history-clock-image"></div><div class="history-line-text image-history-line-text"></div><div class="delete-line">Remove</div></div></li>';
-                let hist_text = document.getElementsByClassName("history-line-text");
-                hist_text[i].innerText=history[i].toString().replace('"','').replace('"','');
+                document.getElementsByClassName("history-line-text")[i].setAttribute("id","history-line-text-"+i);
+                document.getElementsByClassName("delete-line")[i].setAttribute("id","delete-line-"+i);
+                document.getElementById("history-line-text-"+i).innerText=history[i].toString().replace('"','').replace('"','');
             }
         }
     </script>
