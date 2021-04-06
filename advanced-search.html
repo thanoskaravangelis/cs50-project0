@@ -15,10 +15,88 @@
             <label id="title-label">Advanced Search</label>
         </div>
         <div id="title-border"></div>
-        <div id="advanced-main-container"></div>
-        <form action="https://google.com/search">
-            
-            <input type="submit" value="Google Search">
-        </form>
+        <div id="advanced-main-container">
+            <form action="https://google.com/search">
+                <input value="en" name="hl" type="hidden"/>
+                <div id="main-find-title" class="display-n-float">Find pages with...</div>
+                <div id="first-row-gap" class="display-n-float"></div>
+                <div id="first-row-guide" class="display-n-float">To do this in the search box.</div>
+                <div id="input-fields">
+                    <div id="all-words" class="display-n-float" style="width:100%;">
+                        <div class="input-label display-n-float">
+                            <div class="padding-label">
+                                <label for="all-input">all these words:</label>
+                            </div>        
+                        </div>
+                        <div class="input-field display-n-float">
+                            <input id="all-input" value autofocus="autofocus" name="as_q" class="adv-input" type="text"/>
+                        </div>
+                        <div class="input-description display-n-float">
+                            <div class="padding-label">
+                                Type the important words: 
+                                <span style="color:#666; font-family: monospace; font-size: 11px; white-space: pre;">tri-colour rat terrier</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="this-exact" class="display-n-float" style="width:100%;">
+                        <div class="input-label display-n-float">
+                            <div class="padding-label">
+                                <label for="exact-input">this exact word or phrase:</label>
+                            </div>        
+                        </div>
+                        <div class="input-field display-n-float">
+                            <input id="exact-input" value autofocus="autofocus" name="as_epq" class="adv-input" type="text"/>
+                        </div>
+                        <div class="input-description display-n-float">
+                            <div class="padding-label">
+                                Put exact words in quotes: 
+                                <span style="color:#666; font-family: monospace; font-size: 11px; white-space: pre;">"rat terrier"</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="any-of"  class="display-n-float" style="width: 100%;">
+                        <div class="input-label display-n-float">
+                            <div class="padding-label">
+                                <label for="any-input">any of these words:</label>
+                            </div>        
+                        </div>
+                        <div class="input-field display-n-float">
+                            <input id="any-input" value autofocus="autofocus" name="as_oq" class="adv-input" type="text"/>
+                        </div>
+                        <div class="input-description display-n-float">
+                            <div class="padding-label">
+                                Type OR between all the words you want: 
+                                <span style="color:#666; font-family: monospace; font-size: 11px; white-space: pre;">miniature OR standard</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="none-of" class="display-n-float" style="width: 100%;">
+                        <div class="input-label display-n-float">
+                            <div class="padding-label">
+                                <label for="none-input">none of these words:</label>
+                            </div>        
+                        </div>
+                        <div class="input-field display-n-float">
+                            <input id="none-input" value autofocus="autofocus" name="as_eq" class="adv-input" type="text"/>
+                        </div>
+                        <div class="input-description display-n-float">
+                            <div class="padding-label">
+                                Put a minus sign just before the words that you don't want: 
+                                <span style="color:#666; font-family: monospace; font-size: 11px; white-space: pre;">-rodent, -"Jack Russell"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="after-form-break-line"></div>
+                <div style="width:100%">
+                    <div class="input-label display-n-float"></div>
+                    <div class="input-field display-n-float">
+                        <input name="tbs" type="hidden" value/>
+                        <input id = "adv-search" value="Advanced Search" type="submit"/>
+                    </div>
+                </div>
+                <div class="after-form-break-line"></div>
+            </form>
+        </div> 
     </body>
 </html>
