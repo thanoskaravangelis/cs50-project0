@@ -141,7 +141,7 @@
                 document.getElementsByClassName("delete-line")[i].setAttribute("id","delete-line-"+i);
                 document.getElementById("history-line-text-"+i).innerText=history[i].toString().replace('"','').replace('"','');
             }
-            document.getElementById("search-history").innerHTML += '<div class="history-button-container center-content"><input id="search-button" type="submit" value="Google Search" onclick="saveInputValues()"><button id="lucky-button" type="submit">I\'m Feeling Lucky</button></div>'
+            document.getElementById("search-history").innerHTML += '<div class="history-button-container center-content"><input id="search-button" type="submit" value="Google Search" onclick="saveInputValues()"><button id="lucky-button" name="btnI" type="submit">I\'m Feeling Lucky</button></div>'
         }
     </script>
 </head>
@@ -194,7 +194,7 @@
                 </div>
                 <div class="button-container center-content">
                     <input id="search-button" type="submit" value="Google Search" onclick="saveInputValues()">
-                    <button id="lucky-button" type="submit">I'm Feeling Lucky</button>
+                    <button id="lucky-button" name="btnI" type="submit">I'm Feeling Lucky</button>
                 </div>
             </form>
         </div>

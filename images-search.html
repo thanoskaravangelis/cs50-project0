@@ -113,7 +113,6 @@
             history.splice(i,1);
             localStorage.setItem("inputs",JSON.stringify(history));
             console.log(history);
-            showHistory();
         }
 
         window.onload = () => {
@@ -134,7 +133,8 @@
                 if(localStorage.getItem('inputs')==19991 ){
                     return;
                 }
-                list_all.innerHTML += '<li class="history-item"><div class="history-line"><div class="history-clock-image"></div><div class="history-line-text image-history-line-text"></div><div class="delete-line">Remove</div></div></li>';
+                list_all.innerHTML += '<li class="history-item"><div class="history-line"><div class="history-clock-image"></div><div class="history-line-text image-history-line-text onclick=fillInput(this)"></div><div class="delete-line" onclick="deleteItem(this)">Remove</div></div></li>';
+                document.getElementsByClassName("history-item")[i].setAttribute("id","history-item-"+i);
                 document.getElementsByClassName("history-line-text")[i].setAttribute("id","history-line-text-"+i);
                 document.getElementsByClassName("delete-line")[i].setAttribute("id","delete-line-"+i);
                 document.getElementById("history-line-text-"+i).innerText=history[i].toString().replace('"','').replace('"','');
