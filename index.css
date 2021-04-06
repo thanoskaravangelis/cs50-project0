@@ -654,13 +654,24 @@
         color:#000;
     }
 
+    .adv-details-links{
+        text-decoration:none;
+        cursor:pointer;
+        color:rgb(17, 34, 204);
+        font-size: 13px;
+        font-weight:400;
+    }
+
+    .adv-details-links:hover {
+        text-decoration: underline;
+    }
+
     @media only screen and (max-width: 1055px)  {
         .input-description{
             visibility: hidden;
             width:0px;
             min-width: none;
         }
-
         #input-fields {
             padding-top:10px
         }

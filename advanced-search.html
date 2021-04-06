@@ -3,10 +3,15 @@
     <head>
         <title>Google Advanced Search</title>
         <link rel="stylesheet" href="index.css">
+        <script>
+            function logoRedirect() {
+                location.href="index.html";
+            }
+        </script>
     </head>
     <body>
         <div class="top-container" style="background: #f1f1f1; margin-right:0px; padding-right:20px;">
-            <img id="advanced-logo" src = "media/googlelogo_color_272x92dp.webp" alt="google-logo">
+            <img id="advanced-logo" src = "media/googlelogo_color_272x92dp.webp" alt="google-logo" onclick="logoRedirect()">
             <a class="mn_link" href="index.html">Back to Search</a>
             <a class="mn_link" href="images-search.html">Images</a>
             <a class="sign-in-but" id="sign-in-button" href="https://accounts.google.com/signin/v2">Sign In</a>
@@ -90,12 +95,21 @@
                 <div class="after-form-break-line"></div>
                 <div style="width:100%">
                     <div class="input-label display-n-float"></div>
-                    <div class="input-field display-n-float">
+                    <div id="adv-search-container" class="input-field display-n-float">
                         <input name="tbs" type="hidden" value/>
                         <input id = "adv-search" value="Advanced Search" type="submit"/>
                     </div>
                 </div>
                 <div class="after-form-break-line"></div>
+                <div class="display-n-float" style="clear:both; margin-bottom:20px; font-size: 16px; font-weight: 500; color:#333; width:100%;">You can also...</div>
+                <div><a class="adv-details-links" href="https://support.google.com/websearch/answer/2466433">Find pages that are similar to a URL</a></div>
+                <div><a class="adv-details-links" href="https://support.google.com/websearch/answer/54068">Search pages that you've visited</a></div>
+                <div><a class="adv-details-links" href="https://support.google.com/websearch/answer/2466433">Use operators in the search box</a></div>
+                <div><a class="adv-details-links" href="https://www.google.com/preferences?hl=en">Customise your search settings</a></div>
+                
+                
+                
+                
             </form>
         </div> 
         <div class="footer-container">
