@@ -57,6 +57,7 @@
             console.log("old inputs: "+localStorage.getItem("inputs"));
             let newinput = document.getElementById("search-text").value;
             let saved = JSON.parse(localStorage.getItem("inputs"));
+            console.log(saved);
 
             let j = 0;
             while(newinput[j]==' ' && j<newinput.length){
@@ -72,15 +73,16 @@
             else {
 
                 let newsaved ;
+                console.log(newinput);
                 if (saved != 19991) {
-                    newsaved = saved + "," + newinput;
+                    saved.push(newinput);
+                    localStorage.setItem("inputs",JSON.stringify(saved));
+
                 }
                 else {
-                    newsaved = newinput;
+                    newsaved = [newinput];
+                    localStorage.setItem("inputs",JSON.stringify(newsaved));
                 }
-                console.log(newinput);
-                localStorage.setItem("inputs",JSON.stringify(newsaved));
-            
                 document.getElementById("history-list").style.display = 'none';
             }
         }
@@ -102,7 +104,8 @@
                 localStorage.setItem('inputs','19991');
             }
             let hist_str=localStorage.getItem('inputs');
-            let history = hist_str.split(",").reverse();
+            let history = JSON.parse(hist_str).reverse();
+            console.log(history);
             if(history.length==0 || hist_str==19991) {
                 return ;
             }

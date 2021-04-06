@@ -29,19 +29,22 @@
 
         document.addEventListener("click", (evt) => {
             const myelem = document.getElementById("search-border");
-            let target_element = evt.target; // clicked element      
+            const myelem3 = Array.from(document.getElementsByClassName("search-history"));
+            let target_element = evt.target; // clicked element  
             do {
-            if(target_element == myelem) {
+            if(target_element == myelem || myelem3.includes(target_element) ) {
                 // This is a click inside, does nothing, just return.
                 return;
             }
             // Go up the DOM
             target_element = target_element.parentNode;
             } while (target_element);
-            // This is a click outside.      
+            // This is a click outside.
+            
             myelem.style['border-color'] = '#dfe1e5';
             myelem.style['box-shadow'] = 'none'; 
             myelem.style['border-radius'] = '24px';
+            console.log("Hiding history now");
             document.getElementById("search-history").style.display = 'none';
         });
 
@@ -51,12 +54,18 @@
             showClearSearch();
         }
 
+        function fillInput(elem) {
+            document.getElementById("search-text").value = elem.innerText;
+            showClearSearch();
+            document.getElementById("search-text").focus();
+        }
 
         function saveInputValues(){
 
             console.log("old inputs: "+localStorage.getItem("inputs"));
             let newinput = document.getElementById("search-text").value;
             let saved = JSON.parse(localStorage.getItem("inputs"));
+            console.log(saved);
 
             let j = 0;
             while(newinput[j]==' ' && j<newinput.length){
@@ -72,26 +81,17 @@
             else {
 
                 let newsaved ;
+                console.log(newinput);
                 if (saved != 19991) {
-                    newsaved = saved + "," + newinput;
+                    saved.push(newinput);
+                    localStorage.setItem("inputs",JSON.stringify(saved));
+
                 }
                 else {
-                    newsaved = newinput;
+                    newsaved = [newinput];
+                    localStorage.setItem("inputs",JSON.stringify(newsaved));
                 }
-                console.log(newinput);
-                localStorage.setItem("inputs",JSON.stringify(newsaved));
-            
                 document.getElementById("history-list").style.display = 'none';
-            }
-        }
-
-        function deleteItem() {
-            let hist_str=localStorage.getItem('inputs');
-            let history = hist_str.split(",").reverse();
-            let list_all = document.getElementById("history-list");
-            let i;
-            for (i=0; i<history.length && i<10;  i++) {
-                
             }
         }
 
@@ -102,8 +102,20 @@
                 return ;
             }
             document.getElementById("search-border").style['border-radius'] = "24px 24px 0 0";
-
             document.getElementById("search-history").style.display = "flex";
+        }
+
+        function deleteItem(elem) {
+            let hist_str=localStorage.getItem('inputs');
+            let history = hist_str.split(",").reverse();
+            let list_all = document.getElementById("history-list");
+            let i = parseInt(elem.id.toString().slice(-1));
+            document.getElementById("history-item-"+i).remove();
+            console.log("Deleted item with index "+i);
+            history.splice(i,1);
+            localStorage.setItem("inputs",JSON.stringify(history));
+            console.log(history);
+            showHistory();
         }
 
         window.onload = () => {
@@ -112,7 +124,8 @@
                 localStorage.setItem('inputs','19991');
             }
             let hist_str=localStorage.getItem('inputs');
-            let history = hist_str.split(",").reverse();
+            let history = JSON.parse(hist_str).reverse();
+            console.log(history);
             if(history.length==0 || hist_str==19991) {
                 return ;
             }
@@ -123,7 +136,8 @@
                 if(localStorage.getItem('inputs')==19991 ){
                     return;
                 }
-                list_all.innerHTML += '<li class="history-item"><div class="history-line"><div class="history-clock-image"></div><div class="history-line-text"></div><div class="delete-line">Remove</div></div></li>';
+                list_all.innerHTML += '<li class="history-item"><div class="history-line"><div class="history-clock-image"></div><div class="history-line-text" onclick="fillInput(this)"></div><div class="delete-line" onclick="deleteItem(this), showHistory()">Remove</div></div></li>';
+                document.getElementsByClassName("history-item")[i].setAttribute("id","history-item-"+i);
                 document.getElementsByClassName("history-line-text")[i].setAttribute("id","history-line-text-"+i);
                 document.getElementsByClassName("delete-line")[i].setAttribute("id","delete-line-"+i);
                 document.getElementById("history-line-text-"+i).innerText=history[i].toString().replace('"','').replace('"','');
