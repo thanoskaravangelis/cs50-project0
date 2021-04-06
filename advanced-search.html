@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Google</title>
+        <title>Google Advanced Search</title>
+        <link rel="stylesheet" href="index.css">
     </head>
     <body>
-        <div>
-            <a href="index.html">Back to Search</a>
-            <a href="images-search.html">Images</a>
+        <div class="top-container" style="background: #f1f1f1; margin-right:0px; padding-right:20px;">
+            <img id="advanced-logo" src = "media/googlelogo_color_272x92dp.webp" alt="google-logo">
+            <a class="mn_link" href="index.html">Back to Search</a>
+            <a class="mn_link" href="images-search.html">Images</a>
+            <a class="sign-in-but" id="sign-in-button" href="https://accounts.google.com/signin/v2">Sign In</a>
         </div>
-        <br<<br><br>
-        <img src = "media/googlelogo_color_272x92dp.webp" alt="google-logo">
+        <div id="title-adv">
+            <label id="title-label">Advanced Search</label>
+        </div>
+        <div id="title-border"></div>
+        <div id="advanced-main-container"></div>
         <form action="https://google.com/search">
-            <input type="text" name="q">
+            
             <input type="submit" value="Google Search">
         </form>
-        <button type="submit">Feeling Lucky</button>
     </body>
 </html>
