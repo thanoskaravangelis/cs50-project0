@@ -58,29 +58,31 @@
             let newinput = document.getElementById("search-text").value;
             let saved = JSON.parse(localStorage.getItem("inputs"));
 
-            let newsaved ;
-            if (saved != 19991) {
-                newsaved = saved + "," + newinput;
+            let j = 0;
+            while(newinput[j]==' ' && j<newinput.length){
+                    newinput.replace(' ','');
+                    console.log(j);
+                    j++;   
+            }
+
+            if (j == newinput.length) {
+                document.getElementById("history-list").style.display = 'none';
+                return;
             }
             else {
-                newsaved = newinput;
-            }
-            console.log(newinput);
 
-            localStorage.setItem("inputs",JSON.stringify(newsaved));
-
-            let hist_str=localStorage.getItem('inputs');
-            let history = hist_str.split(",",11);
-            if(history.length==0) {
-                return ;
+                let newsaved ;
+                if (saved != 19991) {
+                    newsaved = saved + "," + newinput;
+                }
+                else {
+                    newsaved = newinput;
+                }
+                console.log(newinput);
+                localStorage.setItem("inputs",JSON.stringify(newsaved));
+            
+                document.getElementById("history-list").style.display = 'none';
             }
-            let i;
-            let list_all = document.getElementById("history-list");
-            console.log(history);
-    
-            list_all.innerHTML += '<li class="history-item"><div class="history-line"><div class="history-clock-image"></div><div class="history-line-text"></div><div class="delete-line">Remove</div></div></li>';
-            let hist_text = document.getElementsByClassName("history-line-text");
-            hist_text[i].innerText=newinput;
         }
 
         function showHistory() {
@@ -113,9 +115,9 @@
                 }
                 list_all.innerHTML += '<li class="history-item"><div class="history-line"><div class="history-clock-image"></div><div class="history-line-text"></div><div class="delete-line">Remove</div></div></li>';
                 let hist_text = document.getElementsByClassName("history-line-text");
-                hist_text[i].innerText=history[i].toString();
+                hist_text[i].innerText=history[i].toString().replace('"','').replace('"','');
             }
-            document.getElementById("search-history").innerHTML += '<div class="history-button-container center-content"><input id="search-button" type="submit" value="Google Search" onclick="saveInputValues(), addToHistory()"><button id="lucky-button" type="submit">I\'m Feeling Lucky</button></div>'
+            document.getElementById("search-history").innerHTML += '<div class="history-button-container center-content"><input id="search-button" type="submit" value="Google Search" onclick="saveInputValues()"><button id="lucky-button" type="submit">I\'m Feeling Lucky</button></div>'
         }
     </script>
 </head>
@@ -167,7 +169,7 @@
                     </ul>
                 </div>
                 <div class="button-container center-content">
-                    <input id="search-button" type="submit" value="Google Search" onclick="saveInputValues(), addToHistory()">
+                    <input id="search-button" type="submit" value="Google Search" onclick="saveInputValues()">
                     <button id="lucky-button" type="submit">I'm Feeling Lucky</button>
                 </div>
             </form>
