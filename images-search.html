@@ -80,6 +80,9 @@
 
             newinput = newinput.trim();
 
+            if(saved.includes(newinput))
+            {return;}
+
             if (newinput == "") {
                 document.getElementById("history-list").style.display = 'none';
                 return;
