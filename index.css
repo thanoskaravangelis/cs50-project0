@@ -373,7 +373,7 @@
         justify-content: space-evenly; 
     }
 
-    .footer-link {
+    .footer-link, .footer-link-adv{
         display: block;
         padding:15px;
         white-space: nowrap;
@@ -648,6 +648,10 @@
     #adv-search:hover, #adv-search:focus {
         border:1px solid #2f5bb7;
         background: #357ae8;
+    }
+
+    .footer-link-adv:hover{
+        color:#000;
     }
 
     @media only screen and (max-width: 1055px)  {
