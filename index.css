@@ -307,6 +307,11 @@
         margin-right: 15px;
     }
 
+    .delete-line:hover{
+        color: #1a73e8;
+        text-decoration: underline;
+    }
+
     .history-clock-image {
         display: flex;
         align-items: center;

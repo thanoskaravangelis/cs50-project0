@@ -25,27 +25,37 @@
             x.style.background='none';
         }
 
-
+        let afterRemove = false;
 
         document.addEventListener("click", (evt) => {
-            const myelem = document.getElementById("search-border");
-            const myelem3 = Array.from(document.getElementsByClassName("search-history"));
-            let target_element = evt.target; // clicked element  
-            do {
-            if(target_element == myelem || myelem3.includes(target_element) ) {
-                // This is a click inside, does nothing, just return.
-                return;
+            if(!afterRemove){
+                const myelem = document.getElementById("search-border");
+                const myelem3 = Array.from(document.getElementsByClassName("search-history"));
+                let target_element = evt.target; // clicked element  
+                do {
+                if(target_element == myelem || myelem3.includes(target_element) ) {
+                    // This is a click inside, does nothing, just return.
+                    return;
+                }
+                // Go up the DOM
+                target_element = target_element.parentNode;
+                } while (target_element);
+                // This is a click outside.
+                
+                myelem.style['border-color'] = '#dfe1e5';
+                myelem.style['box-shadow'] = 'none'; 
+                myelem.style['border-radius'] = '24px';
+                console.log("Hiding history now");
+                document.getElementById("search-history").style.display = 'none';
             }
-            // Go up the DOM
-            target_element = target_element.parentNode;
-            } while (target_element);
-            // This is a click outside.
-            
-            myelem.style['border-color'] = '#dfe1e5';
-            myelem.style['box-shadow'] = 'none'; 
-            myelem.style['border-radius'] = '24px';
-            console.log("Hiding history now");
-            document.getElementById("search-history").style.display = 'none';
+            else {
+                if(JSON.parse(localStorage.getItem('inputs')).length == 0) {
+                    document.getElementById("search-border").style['border-radius'] = '24px';
+                    document.getElementById("search-border").focus();
+                    document.getElementById("search-history").style.display = 'none';
+                }
+                document.addEventListener("click",(evt)=>{});
+            }
         });
 
         function deleteText() {
@@ -115,6 +125,7 @@
             history.splice(i,1);
             localStorage.setItem("inputs",JSON.stringify(history));
             console.log(history);
+            afterRemove = true;
         }
 
         window.onload = () => {
