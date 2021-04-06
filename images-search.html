@@ -51,6 +51,11 @@
             showClearSearch();
         }
 
+        function fillInput(elem) {
+            document.getElementById("search-text").value = elem.innerText;
+            showClearSearch();
+            document.getElementById("search-text").focus();
+        }
 
         function saveInputValues(){
 
@@ -89,13 +94,26 @@
 
         function showHistory() {
             let hist_str=localStorage.getItem('inputs');
-            let history = hist_str.split(", ",11);
+            let history = JSON.parse(hist_str);
             if(history.length==0 || hist_str==19991) {
                 return ;
             }
             document.getElementById("search-border").style['border-radius'] = "24px 24px 0 0";
 
             document.getElementById("search-history").style.display = "flex";
+        }
+
+        function deleteItem(elem) {
+            let hist_str=localStorage.getItem('inputs');
+            let history = JSON.parse(hist_str).reverse();
+            let list_all = document.getElementById("history-list");
+            let i = parseInt(elem.id.toString().slice(-1));
+            document.getElementById("history-item-"+i).remove();
+            console.log("Deleted item with index "+i);
+            history.splice(i,1);
+            localStorage.setItem("inputs",JSON.stringify(history));
+            console.log(history);
+            showHistory();
         }
 
         window.onload = () => {
