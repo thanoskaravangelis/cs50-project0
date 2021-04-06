@@ -51,10 +51,11 @@
             else {
                 if(JSON.parse(localStorage.getItem('inputs')).length == 0) {
                     document.getElementById("search-border").style['border-radius'] = '24px';
-                    document.getElementById("search-border").focus();
                     document.getElementById("search-history").style.display = 'none';
                 }
-                document.addEventListener("click",(evt)=>{});
+                document.addEventListener("click",(evt)=>{
+                    document.getElementById("search-border").focus();
+                });
             }
         });
 
@@ -77,14 +78,9 @@
             let saved = JSON.parse(localStorage.getItem("inputs"));
             console.log(saved);
 
-            let j = 0;
-            while(newinput[j]==' ' && j<newinput.length){
-                    newinput.replace(' ','');
-                    console.log(j);
-                    j++;   
-            }
+            newinput = newinput.trim();
 
-            if (j == newinput.length) {
+            if (newinput == "") {
                 document.getElementById("history-list").style.display = 'none';
                 return;
             }
@@ -112,19 +108,28 @@
                 return ;
             }
             document.getElementById("search-border").style['border-radius'] = "24px 24px 0 0";
-
             document.getElementById("search-history").style.display = "flex";
         }
 
         function deleteItem(elem) {
-            let hist_str=localStorage.getItem('inputs');
-            let history = JSON.parse(hist_str).reverse();
             let list_all = document.getElementById("history-list");
             let i = parseInt(elem.id.toString().slice(-1));
+            let this_item = document.getElementById("history-line-text-"+i).innerText;
+            console.log(this_item);
             document.getElementById("history-item-"+i).remove();
-            console.log("Deleted item with index "+i);
-            history.splice(i,1);
-            localStorage.setItem("inputs",JSON.stringify(history));
+
+            let hist_str=localStorage.getItem('inputs');
+            let history = JSON.parse(hist_str).reverse();
+            console.log(history);
+            let j;
+            for(j=0; j<history.length && j<10; j++){
+                if(this_item == history[j].toString()) {
+                    history.splice(j,1);
+                    console.log("Deleted item with index "+j);
+                    localStorage.setItem("inputs",JSON.stringify(history.reverse()));
+                    break;
+                }
+            }
             console.log(history);
             afterRemove = true;
         }
@@ -132,7 +137,7 @@
         window.onload = () => {
             deleteText();
             if(!localStorage.getItem("inputs")) {
-                localStorage.setItem('inputs','19991');
+                localStorage.setItem('inputs',"19991");
             }
             let hist_str=localStorage.getItem('inputs');
             let history = JSON.parse(hist_str).reverse();
@@ -142,7 +147,6 @@
             }
             let i;
             let list_all = document.getElementById("history-list");
-            console.log(history);
             for (i=0; i<history.length && i<10;  i++) {
                 if(localStorage.getItem('inputs')==19991 ){
                     return;
