@@ -4,6 +4,7 @@
 <head>
     <title>Google Images</title>
     <link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
     <script>
         function showClearSearch() {
             var x = document.getElementById("search-text");
@@ -91,7 +92,7 @@
 
                 let newsaved ;
                 console.log(newinput);
-                if (saved != 19991) {
+                if (saved[0] != 19991) {
                     saved.push(newinput);
                     localStorage.setItem("inputs",JSON.stringify(saved));
 
@@ -107,7 +108,7 @@
         function showHistory() {
             let hist_str=localStorage.getItem('inputs');
             let history = JSON.parse(hist_str);
-            if(history.length==0 || hist_str==19991) {
+            if(history.length==0 || history[0]==19991) {
                 return ;
             }
             document.getElementById("search-border").style['border-radius'] = "24px 24px 0 0";
@@ -140,7 +141,7 @@
         window.onload = () => {
             deleteText();
             if(!localStorage.getItem("inputs")) {
-                localStorage.setItem('inputs',"19991");
+                localStorage.setItem('inputs',"[\"19991\"]");
             }
             let hist_str=localStorage.getItem('inputs');
             let history = JSON.parse(hist_str).reverse();
